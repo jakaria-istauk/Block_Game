@@ -31,7 +31,7 @@ score = 0
 
 clock = pygame.time.Clock()
 
-myFont = pygame.font.SysFont("monospace", 35)
+myFont = pygame.font.SysFont("comicsansms", 35)
 
 def set_level(score, speed):
 	if score < 20:
@@ -122,7 +122,7 @@ while not game_over:
 
 	text = "Score: "+ str(score)
 	label = myFont.render(text, 1, yellow)
-	screen.blit(label, (width-200, height-40))
+	screen.blit(label, (width-200, height-60))
 
 	if collision_check(enemy_list, player_pos):
 		game_over = True
@@ -136,3 +136,23 @@ while not game_over:
 
 
 print("Your Score is: " + str(score))
+
+screen = pygame.display.set_mode((640, 480))
+clock = pygame.time.Clock()
+done = False
+
+font = pygame.font.SysFont("comicsansms", 72)
+text = font.render("Your Score is: "+ str(score) , True, (0, 128, 0))
+
+while not done:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            done = True
+    
+    screen.fill((255, 255, 255))
+    screen.blit(text, (320 - text.get_width() // 2, 240 - text.get_height() // 2))
+    
+    pygame.display.flip()
+    clock.tick(0)
